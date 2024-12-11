@@ -6,6 +6,7 @@ using CdpDotnetTracing.Utils.Mongo;
 using FluentValidation;
 using System.Diagnostics.CodeAnalysis;
 using CdpDotnetTracing.Config;
+using CdpDotnetTracing.Trace;
 using CdpDotnetTracing.Utils.Logging;
 using Serilog;
 
@@ -74,9 +75,7 @@ static WebApplication SetupApplication(WebApplication app)
     app.UseHeaderPropagation();
     app.UseRouting();
     app.MapHealthChecks("/health");
-
-    // Example module, remove before deploying!
-    app.UseExampleEndpoints();
+    app.UseTraceEndpoints();
 
     return app;
 }
